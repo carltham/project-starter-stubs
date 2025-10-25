@@ -1,9 +1,9 @@
 import cors, { CorsOptions } from "cors";
 import express from "express";
-import { BookController } from "./controllers/book-controller";
-import { HomeController } from "./controllers/home-controller";
-import { RootController } from "./controllers/root-controller";
-import { UserController } from "./controllers/user-controller";
+import { APIBookController } from "./controllers/api-book-controller";
+import { APIHomeController } from "./controllers/api-home-controller";
+import { APIRootController } from "./controllers/api-root-controller";
+import { APIUserController } from "./controllers/api-user-controller";
 
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
@@ -32,12 +32,12 @@ application.use(express.urlencoded({ extended: true }));
  */
 const appFolder = `${__dirname}/../ui/browser`;
 application.use(express.static(appFolder));
-application.use("/home", new HomeController().matchHttpToFunction);
 
 /**
  * --- The rest is the REST API ---
  */
-application.use("/api", new RootController().matchHttpToFunction);
-application.use("/api/books", new BookController().matchHttpToFunction);
+application.use("/home", new APIHomeController().matchHttpToFunction);
+application.use("/api", new APIRootController().matchHttpToFunction);
+application.use("/api/books", new APIBookController().matchHttpToFunction);
 
-application.use("/api/users", new UserController().matchHttpToFunction);
+application.use("/api/users", new APIUserController().matchHttpToFunction);

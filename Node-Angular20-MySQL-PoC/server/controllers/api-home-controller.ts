@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 
-export class RootController {
+export class APIHomeController {
   private static BASE: string = "/";
   matchHttpToFunction = Router();
 
@@ -9,11 +9,11 @@ export class RootController {
   }
 
   intializeApi() {
-    this.matchHttpToFunction.get(RootController.BASE, this.greet);
+    this.matchHttpToFunction.get(APIHomeController.BASE, this.greet);
   }
 
   greet(req: Request, res: Response) {
-    return res.json({ message: "Welcome to bezkoder application." });
+    return res.json({ message: "Welcome home!" });
   }
 }
 

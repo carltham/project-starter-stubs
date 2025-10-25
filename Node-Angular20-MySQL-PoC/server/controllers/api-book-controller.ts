@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { BookService } from "../services/book-service";
 
-export class BookController {
+export class APIBookController {
   matchHttpToFunction = Router();
   bookService = new BookService();
 

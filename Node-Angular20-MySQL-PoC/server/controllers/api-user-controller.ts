@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { UserService } from "../services/user-service";
 
-export class UserController {
+export class APIUserController {
   matchHttpToFunction = Router();
   userService = new UserService();
 
