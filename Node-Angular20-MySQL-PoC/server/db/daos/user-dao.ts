@@ -46,7 +46,6 @@ export class UserDAOImpl implements UserDAO {
       condition += `LOWER(title) LIKE '%${searchParams.title}%'`;
 
     if (condition.length) query += " WHERE " + condition;
-    console.log("QUERY: ", query);
 
     return new Promise<UserDTO[]>((resolve, reject) => {
       let users: UserDTO[];

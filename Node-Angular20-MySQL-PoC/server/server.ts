@@ -1,6 +1,5 @@
 import cors, { CorsOptions } from "cors";
 import express from "express";
-import { dirname } from "node:path";
 import { BookController } from "./controllers/book-controller";
 import { HomeController } from "./controllers/home-controller";
 import { RootController } from "./controllers/root-controller";
@@ -29,18 +28,16 @@ application.use(express.json());
 application.use(express.urlencoded({ extended: true }));
 
 /**
- * Serve static files from /browser
+ * Serve angular and static files
  */
-const appFolder = `${__dirname}/../ui/browser`; // "build/ui/browser/index.html";
-console.log("dirname(appFolder) = ", dirname(appFolder));
-console.log("appFolder = ", appFolder);
-//application.use(staticFiles);
+const appFolder = `${__dirname}/../ui/browser`;
 application.use(express.static(appFolder));
-
-//application.use("/", staticFiles);
 application.use("/home", new HomeController().matchHttpToFunction);
+
+/**
+ * --- The rest is the REST API ---
+ */
 application.use("/api", new RootController().matchHttpToFunction);
 application.use("/api/books", new BookController().matchHttpToFunction);
 
-// --- Example REST API ---
 application.use("/api/users", new UserController().matchHttpToFunction);

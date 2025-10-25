@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 
 import { UserDTO } from "../domain/user";
 import { UserAPIService } from "../services/user-api.service";
@@ -9,16 +9,21 @@ import { UserAPIService } from "../services/user-api.service";
   templateUrl: "./users.component.html",
   styleUrl: "./users.component.scss",
 })
-export class UsersComponent implements OnChanges {
+export class UsersComponent implements OnChanges, OnInit {
   users: UserDTO[] = [];
   loading = true;
 
   constructor(private userAPIService: UserAPIService) {}
+  ngOnInit(): void {
+    this.reload();
+  }
   ngOnChanges(changes: SimpleChanges): void {
+    this.reload();
+  }
+  reload() {
     this.userAPIService.getAll().subscribe({
       next: (list: any) => {
         this.users = list;
-        console.log("UsersComponent: users = ", this.users);
       },
       error: (err: any) => console.error(err),
       complete: () => (this.loading = false),

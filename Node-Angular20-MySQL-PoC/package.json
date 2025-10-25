@@ -5,10 +5,10 @@
   "main": "server.ts",
   "scripts": {
     "test": "ng test",
-    "build": "tsc",
-    "dev": "node ./build/server/server.js",
-    "watch": "nodemon --watch src/ --watch server/ -e ts,html,scss --exec 'npm run start'",
-    "start": "tsc && ng build && npm run dev"
+    "build": "tsc && ng build",
+    "dev": "nodemon --watch src/ --watch server/ -e ts,html,scss --exec 'npm run start'",
+    "start": "npm run build && npm run publish-server",
+    "publish-server": "node ./build/server/server.js"
   },
   "keywords": [
     "nodejs",
