@@ -1,2 +1,6 @@
 node_modules/
 npm-dist/
+/ads-management-system/backend/target/
+/ads-management-system/spring-boot-template-engines-demo/target/
+/Spring-Angular20-classic-MySQL-PoC/target/
+/Spring-Angular20-MySQL-PoC/target/
