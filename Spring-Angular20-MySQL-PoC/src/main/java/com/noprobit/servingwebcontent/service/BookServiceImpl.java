@@ -6,6 +6,7 @@ import com.noprobit.servingwebcontent.exception.BookNotFoundException;
 import com.noprobit.servingwebcontent.repository.BookRepository;
 import com.noprobit.servingwebcontent.requests.NewBookRequest;
 import com.noprobit.servingwebcontent.requests.UpdateBookRequest;
+import com.noprobit.servingwebcontent.supporting.State;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -61,6 +62,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> getAllByState(State state) {
+
+        return bookRepository.findByState(state);
+        //return bookRepository.findAll().stream()
+        //        .collect(Collectors.toList());
+    }
+
+    @Override
     public Book getBookByUuid(String bookKey) {
         validateKey(bookKey);
         return bookRepository.findByUuid(bookKey)
@@ -69,9 +78,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Long deleteBookByUuid(String bookKey) {
+    public Long deleteBookById(String bookKey) {
         validateKey(bookKey);
         return bookRepository.deleteByUuid(bookKey);
+    }
+
+    @Override
+    public void deleteAll() {
+        bookRepository.deleteAll();
     }
 
     @Override
@@ -79,7 +93,7 @@ public class BookServiceImpl implements BookService {
     public Book updateBook(UpdateBookRequest updateBookRequest) {
         Assert.notNull(updateBookRequest, "No book requested to update");
 
-        Book existingBook = this.getBookByUuid(updateBookRequest.getKey());
+        Book existingBook = this.getBookByUuid(updateBookRequest.getId());
 
         if (existingBook == null) {
             throw new BookNotFoundException("Book with email " + updateBookRequest.getEmail() + " not found");

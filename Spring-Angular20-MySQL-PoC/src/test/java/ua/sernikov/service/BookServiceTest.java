@@ -145,7 +145,7 @@ public class BookServiceTest {
         Book operator = bookService.createBook(TEST_NAME, TEST_EMAIL);
         when(personRepositoryMock.deleteByUuid(operator.getUuid())).thenReturn(1L);
 
-        Long deletedCount = bookService.deleteBookByUuid(operator.getUuid());
+        Long deletedCount = bookService.deleteBookById(operator.getUuid());
         List<Book> operators = bookService.getAllBooks();
 
         assertThat(deletedCount).isNotNull()
@@ -156,7 +156,7 @@ public class BookServiceTest {
     @Test
     public void deleteBookByUuid_ShouldGiveZero_WhenBookDoesNotExist() throws Exception {
         when(personRepositoryMock.deleteByUuid(anyString())).thenReturn(0L);
-        Long deletedCount = bookService.deleteBookByUuid(UUID.randomUUID().toString());
+        Long deletedCount = bookService.deleteBookById(UUID.randomUUID().toString());
 
         assertThat(deletedCount).isNotNull()
                 .isEqualTo(0L);
@@ -165,7 +165,7 @@ public class BookServiceTest {
     @Test()
     public void deleteBookByUuid_ShouldThrowIllegalArgumentException_WhenKeyIsNotUUID() throws Exception {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            bookService.deleteBookByUuid("test string");
+            bookService.deleteBookById("test string");
         });
 
         assertEquals("'uuid' should be a UUID key", exception.getMessage());
@@ -174,8 +174,8 @@ public class BookServiceTest {
     @Test()
     public void deleteBookByUuid_ShouldThrowIllegalArgumentException_WhenKeyIsNotPresentedOrEmpty() throws Exception {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            bookService.deleteBookByUuid(null);
-            bookService.deleteBookByUuid("");
+            bookService.deleteBookById(null);
+            bookService.deleteBookById("");
         });
 
         assertEquals("'uuid' should be specified", exception.getMessage());

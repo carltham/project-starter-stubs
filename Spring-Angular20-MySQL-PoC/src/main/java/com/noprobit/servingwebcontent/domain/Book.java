@@ -2,6 +2,7 @@ package com.noprobit.servingwebcontent.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.noprobit.servingwebcontent.annotation.UUID;
+import com.noprobit.servingwebcontent.supporting.State;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,9 @@ public class Book implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Long id;
+
+    @Column()
+    private State state;
 
     @Column(unique = true, nullable = false)
     @UUID
