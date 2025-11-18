@@ -1,28 +1,55 @@
-package ua.sernikov.controller;
+package com.noprobit.servingwebcontent.controller;
 
-public class APIBookController {
+import com.noprobit.servingwebcontent.domain.Person;
+import com.noprobit.servingwebcontent.requests.UpdateUserRequest;
+import com.noprobit.servingwebcontent.service.OperatorService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.*;
 
-/*
-    // Create a new Book
-    this.matchHttpToFunction.post('/', this.bookService.create);
+@RestController
+@RequestMapping(value = "/operators",
+        produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+        consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class OperatorController {
 
-    // Retrieve all Books
-    this.matchHttpToFunction.get('/', this.bookService.findAll);
+    private OperatorService operatorService;
 
-    // Retrieve all published Books
-    this.matchHttpToFunction.get('/published', this.bookService.findAllPublished);
+    @Autowired
+    public OperatorController(OperatorService operatorService) {
+        this.operatorService = operatorService;
+    }
 
-    // Retrieve a single Book with id
-    this.matchHttpToFunction.get('/:id', this.bookService.findOne);
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Person> getAllOperators() {
+        return operatorService.getAllOperators();
+    }
 
-    // Update a Book with id
-    this.matchHttpToFunction.put('/:id', this.bookService.update);
+    @RequestMapping(method = RequestMethod.GET, value = "{key}")
+    public Person getOperator(@PathVariable("key") String operatorKey) {
+        Assert.hasText(operatorKey, "Key is missing");
+        return operatorService.getOperatorByKey(operatorKey);
+    }
 
-    // Delete a Book with id
-    this.matchHttpToFunction.delete('/:id', this.bookService.delete);
+    @RequestMapping(method = RequestMethod.POST)
+    public Person createOperator(@RequestBody Person operator) {
+        return operatorService.createOperator(operator.getName(), operator.getEmail());
+    }
 
-    // Delete all Books
-    this.matchHttpToFunction.delete('/', this.bookService.deleteAll);
-    */
+    @RequestMapping(method = RequestMethod.PUT, value = "{key}")
+    public Person updateOperator(@PathVariable("key") String operatorKey, @RequestBody UpdateUserRequest updateUserRequest) {
+        Assert.hasText(operatorKey, "Key is missing");
+        Assert.notNull(updateUserRequest, "Request does not contain a User to be modified");
 
+        updateUserRequest.setKey(operatorKey);
+        return operatorService.updateOperator(updateUserRequest);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "{key}")
+    public void deleteOperator(@PathVariable("key") String operatorKey) {
+        Assert.hasText(operatorKey, "Key is missing");
+        operatorService.deleteOperatorByKey(operatorKey);
+    }
 }
