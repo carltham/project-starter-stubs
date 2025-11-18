@@ -2,13 +2,13 @@ package com.noprobit.servingwebcontent.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.noprobit.servingwebcontent.annotation.UUID;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -24,7 +24,7 @@ public class Person implements Serializable {
 
     @Column(unique = true, nullable = false)
     @UUID
-    private String userKey;
+    private String uuid;
 
     @Column(nullable = false)
     private String fullName;
@@ -56,12 +56,12 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public String getKey() {
-        return userKey;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setKey(String key) {
-        this.userKey = key;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {
@@ -91,7 +91,7 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
-                .append("key", userKey)
+                .append("uuid", uuid)
                 .append("name", fullName)
                 .append("email", email)
                 .append("password", password)
@@ -106,13 +106,13 @@ public class Person implements Serializable {
         if (!(o instanceof Person)) {
             return false;
         }
-        Person user = (Person) o;
-        return Objects.equals(userKey, user.userKey)
-                && Objects.equals(email, user.email);
+        Person person = (Person) o;
+        return Objects.equals(uuid, person.uuid)
+                && Objects.equals(email, person.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userKey, email);
+        return Objects.hash(uuid, email);
     }
 }

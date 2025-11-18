@@ -1,12 +1,12 @@
 package com.noprobit.servingwebcontent.exception;
 
-public class UserNotFoundException extends RuntimeException {
+public class BookNotFoundException extends RuntimeException {
 
-    public UserNotFoundException(String message) {
+    public BookNotFoundException(String message) {
         super(message);
     }
 
-    public UserNotFoundException(String message, Throwable cause) {
+    public BookNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -1,8 +1,8 @@
-package ua.sernikov.controller;
+package com.noprobit.servingwebcontent.controller;
 
-public class APIBookController {
+public class APIBookController2 {
 
-/*
+    /*
     // Create a new Book
     this.matchHttpToFunction.post('/', this.bookService.create);
 
@@ -23,6 +23,5 @@ public class APIBookController {
 
     // Delete all Books
     this.matchHttpToFunction.delete('/', this.bookService.deleteAll);
-    */
-
+     */
 }

@@ -1,7 +1,7 @@
 package com.noprobit.servingwebcontent.service;
 
 import com.noprobit.servingwebcontent.domain.Person;
-import com.noprobit.servingwebcontent.requests.UpdateUserRequest;
+import com.noprobit.servingwebcontent.requests.UpdatePersonRequest;
 import java.util.List;
 
 public interface OperatorService {
@@ -10,9 +10,9 @@ public interface OperatorService {
 
     List<Person> getAllOperators();
 
-    Person getOperatorByKey(String operatorKey);
+    Person getOperatorByUuid(String operatorKey);
 
-    void deleteOperatorByKey(String operatorKey);
+    void deleteOperatorByUuid(String operatorKey);
 
-    Person updateOperator(UpdateUserRequest updateOperatorRequest);
+    Person updateOperator(UpdatePersonRequest updateOperatorRequest);
 }

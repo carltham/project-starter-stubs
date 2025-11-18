@@ -1,12 +1,12 @@
 package com.noprobit.servingwebcontent.exception;
 
-public class UserAlreadyExistException extends RuntimeException {
+public class PersonAlreadyExistException extends RuntimeException {
 
-    public UserAlreadyExistException(String message) {
+    public PersonAlreadyExistException(String message) {
         super(message);
     }
 
-    public UserAlreadyExistException(String message, Throwable cause) {
+    public PersonAlreadyExistException(String message, Throwable cause) {
         super(message, cause);
     }
 }

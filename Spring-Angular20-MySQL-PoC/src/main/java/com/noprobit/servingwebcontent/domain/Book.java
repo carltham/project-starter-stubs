@@ -15,7 +15,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class Person implements Serializable {
+public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +24,7 @@ public class Person implements Serializable {
 
     @Column(unique = true, nullable = false)
     @UUID
-    private String userKey;
+    private String uuid;
 
     @Column(nullable = false)
     private String fullName;
@@ -39,15 +39,15 @@ public class Person implements Serializable {
     @Size(min = 5, max = 255)
     private String password;
 
-    public Person() {
+    public Book() {
     }
 
-    public Person(String name, String email) {
+    public Book(String name, String email) {
         this.fullName = name;
         this.email = email;
     }
 
-    public Person(String name, String email, String password) {
+    public Book(String name, String email, String password) {
         this(name, email);
         this.password = password;
     }
@@ -56,12 +56,12 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public String getKey() {
-        return userKey;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setKey(String key) {
-        this.userKey = key;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getName() {
@@ -91,7 +91,7 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
-                .append("key", userKey)
+                .append("uuid", uuid)
                 .append("name", fullName)
                 .append("email", email)
                 .append("password", password)
@@ -103,16 +103,16 @@ public class Person implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Person)) {
+        if (!(o instanceof Book)) {
             return false;
         }
-        Person user = (Person) o;
-        return Objects.equals(userKey, user.userKey)
-                && Objects.equals(email, user.email);
+        Book book = (Book) o;
+        return Objects.equals(uuid, book.uuid)
+                && Objects.equals(email, book.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userKey, email);
+        return Objects.hash(uuid, email);
     }
 }

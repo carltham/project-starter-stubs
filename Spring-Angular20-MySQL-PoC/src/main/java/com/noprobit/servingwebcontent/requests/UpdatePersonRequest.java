@@ -1,16 +1,16 @@
 package com.noprobit.servingwebcontent.requests;
 
-public class UpdateUserRequest {
+public class UpdatePersonRequest {
 
     private String key;
     private String name;
     private String email;
     private String password;
 
-    public UpdateUserRequest() {
+    public UpdatePersonRequest() {
     }
 
-    public UpdateUserRequest(String key, String name, String email) {
+    public UpdatePersonRequest(String key, String name, String email) {
         this.key = key;
         this.name = name;
         this.email = email;

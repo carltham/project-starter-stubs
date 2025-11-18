@@ -1,24 +1,24 @@
 package com.noprobit.servingwebcontent.repository;
 
-import com.noprobit.servingwebcontent.domain.Person;
+import com.noprobit.servingwebcontent.domain.Book;
 import java.util.Collection;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<Person, Long> {
+public interface BookRepository extends CrudRepository<Book, Long> {
 
     @Override
-    Collection<Person> findAll();
+    Collection<Book> findAll();
 
-    Optional<Person> findByUserKey(String key);
+    Optional<Book> findByUuid(String uuid);
 
-    Optional<Person> findByEmail(String email);
+    Optional<Book> findByEmail(String email);
 
-    Long deleteByUserKey(String key);
+    Long deleteByUuid(String uuid);
 
     @Modifying(clearAutomatically = true)
-    @Query("update Person u set u.fullName=?1, u.email=?2 where u.userKey=?3")
-    void updateByUserKey(String name, String email, String key);
+    @Query("update Book b set b.fullName=?1, b.email=?2 where b.uuid=?3")
+    void updateByUuid(String name, String email, String uuid);
 }

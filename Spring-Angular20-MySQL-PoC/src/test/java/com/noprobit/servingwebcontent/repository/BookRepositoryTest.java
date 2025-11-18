@@ -12,29 +12,29 @@ import org.springframework.test.context.ContextConfiguration;
 //@RunWith(SpringRunner.class)
 @ContextConfiguration
 @DataJpaTest
-public class UserRepositoryTest {
+public class BookRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private UserRepository userRepository;
+    private PersonRepository personRepository;
 
     private final String TEST_NAME = "test";
     private final String TEST_EMAIL = TEST_NAME + "@mail.com";
     private final String TEST_PASSWORD = "123456";
 
     @Test
-    public void updateByKey_ShouldUpdateNameAndEmail() throws Exception {
+    public void updateByUuid_ShouldUpdateNameAndEmail() throws Exception {
         Person operator = new Person(TEST_NAME, TEST_EMAIL, TEST_PASSWORD);
-        operator.setKey(UUID.randomUUID().toString());
+        operator.setUuid(UUID.randomUUID().toString());
         entityManager.persistAndFlush(operator);
 
         String expectedName = "new_test";
         String expectedEmail = expectedName + "@mail.com";
-        userRepository.updateByUserKey(expectedName, expectedEmail, operator.getKey());
+        personRepository.updateByUuid(expectedName, expectedEmail, operator.getUuid());
 
-        Person actualUser = userRepository.findByUserKey(operator.getKey()).orElse(null);
+        Person actualUser = personRepository.findByUuid(operator.getUuid()).orElse(null);
 
         assertThat(actualUser).isNotNull();
 
@@ -44,18 +44,18 @@ public class UserRepositoryTest {
         assertThat(actualUser.getEmail()).isEqualTo(expectedEmail)
                 .isNotEqualTo(TEST_EMAIL);
 
-        assertThat(actualUser.getKey()).isEqualTo(operator.getKey());
+        assertThat(actualUser.getUuid()).isEqualTo(operator.getUuid());
     }
 
     @Test
-    public void updateByKey_ShouldNotUpdate_WhenUserDoesNotExist() throws Exception {
+    public void updateByUuid_ShouldNotUpdate_WhenUserDoesNotExist() throws Exception {
         Person operator = new Person(TEST_NAME, TEST_EMAIL, TEST_PASSWORD);
-        operator.setKey(UUID.randomUUID().toString());
+        operator.setUuid(UUID.randomUUID().toString());
         entityManager.persistAndFlush(operator);
 
-        userRepository.updateByUserKey("new_test", "new_test@mail.com", UUID.randomUUID().toString());
+        personRepository.updateByUuid("new_test", "new_test@mail.com", UUID.randomUUID().toString());
 
-        Person actualUser = userRepository.findByUserKey(operator.getKey()).orElse(null);
+        Person actualUser = personRepository.findByUuid(operator.getUuid()).orElse(null);
 
         assertThat(actualUser).isNotNull();
         assertThat(actualUser.getName()).isEqualTo(TEST_NAME);

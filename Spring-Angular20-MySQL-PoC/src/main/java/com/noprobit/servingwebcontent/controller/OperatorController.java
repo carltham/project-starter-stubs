@@ -1,7 +1,7 @@
 package com.noprobit.servingwebcontent.controller;
 
 import com.noprobit.servingwebcontent.domain.Person;
-import com.noprobit.servingwebcontent.requests.UpdateUserRequest;
+import com.noprobit.servingwebcontent.requests.UpdatePersonRequest;
 import com.noprobit.servingwebcontent.service.OperatorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class OperatorController {
     @RequestMapping(method = RequestMethod.GET, value = "{key}")
     public Person getOperator(@PathVariable("key") String operatorKey) {
         Assert.hasText(operatorKey, "Key is missing");
-        return operatorService.getOperatorByKey(operatorKey);
+        return operatorService.getOperatorByUuid(operatorKey);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -39,17 +39,17 @@ public class OperatorController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "{key}")
-    public Person updateOperator(@PathVariable("key") String operatorKey, @RequestBody UpdateUserRequest updateUserRequest) {
+    public Person updateOperator(@PathVariable("key") String operatorKey, @RequestBody UpdatePersonRequest updatePersonRequest) {
         Assert.hasText(operatorKey, "Key is missing");
-        Assert.notNull(updateUserRequest, "Request does not contain a User to be modified");
+        Assert.notNull(updatePersonRequest, "Request does not contain a Person to be modified");
 
-        updateUserRequest.setKey(operatorKey);
-        return operatorService.updateOperator(updateUserRequest);
+        updatePersonRequest.setKey(operatorKey);
+        return operatorService.updateOperator(updatePersonRequest);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "{key}")
     public void deleteOperator(@PathVariable("key") String operatorKey) {
         Assert.hasText(operatorKey, "Key is missing");
-        operatorService.deleteOperatorByKey(operatorKey);
+        operatorService.deleteOperatorByUuid(operatorKey);
     }
 }

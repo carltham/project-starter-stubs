@@ -1,18 +1,21 @@
 package com.noprobit.servingwebcontent.service;
 
-import com.noprobit.servingwebcontent.domain.Person;
-import com.noprobit.servingwebcontent.requests.UpdateUserRequest;
+import com.noprobit.servingwebcontent.domain.Book;
+import com.noprobit.servingwebcontent.requests.NewBookRequest;
+import com.noprobit.servingwebcontent.requests.UpdateBookRequest;
 import java.util.List;
 
-public interface OperatorService {
+public interface BookService {
 
-    Person createOperator(String name, String email);
+    Book createBook(String name, String email);
 
-    List<Person> getAllOperators();
+    Book createBook(NewBookRequest bookRequest);
 
-    Person getOperatorByKey(String operatorKey);
+    List<Book> getAllBooks();
 
-    void deleteOperatorByKey(String operatorKey);
+    Book getBookByUuid(String bookKey);
 
-    Person updateOperator(UpdateUserRequest updateOperatorRequest);
+    Long deleteBookByUuid(String bookKey);
+
+    Book updateBook(UpdateBookRequest book);
 }

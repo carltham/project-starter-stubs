@@ -3,7 +3,7 @@ package com.noprobit.servingwebcontent.requests;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
-public class NewUserRequest {
+public class NewPersonRequest {
 
     @NotBlank
     @Size(min = 3, max = 50)

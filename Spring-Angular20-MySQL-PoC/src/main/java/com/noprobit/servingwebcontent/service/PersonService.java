@@ -1,21 +1,21 @@
 package com.noprobit.servingwebcontent.service;
 
 import com.noprobit.servingwebcontent.domain.Person;
-import com.noprobit.servingwebcontent.requests.NewUserRequest;
-import com.noprobit.servingwebcontent.requests.UpdateUserRequest;
+import com.noprobit.servingwebcontent.requests.NewPersonRequest;
+import com.noprobit.servingwebcontent.requests.UpdatePersonRequest;
 import java.util.List;
 
-public interface UserService {
+public interface PersonService {
 
-    Person createUser(String name, String email);
+    Person createPerson(String name, String email);
 
-    Person createUser(NewUserRequest userRequest);
+    Person createPerson(NewPersonRequest personRequest);
 
-    List<Person> getAllUsers();
+    List<Person> getAllPersons();
 
-    Person getUserByKey(String userKey);
+    Person getPersonByUuid(String key);
 
-    Long deleteUserByKey(String userKey);
+    Long deletePersonByUuid(String key);
 
-    Person updateUser(UpdateUserRequest user);
+    Person updatePerson(UpdatePersonRequest person);
 }
