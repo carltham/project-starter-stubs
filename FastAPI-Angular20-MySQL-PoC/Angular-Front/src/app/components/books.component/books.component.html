@@ -1,0 +1,24 @@
+<h2>My Books</h2>
+@if (loading) {
+<p>Loading…</p>
+}
+<table>
+  <!--
+  <li *ngFor="let u of users()">
+    {{ u.name }} <small>({{ u.email }})</small>
+  </li>
+  -->
+  @for (book of books; track book.title) {
+  <tr>
+    <td> Title : {{ book.title }} </td>
+    <td> - </td>
+    <td>(Description : {{ book.description }})</td>
+    <td> - </td>
+    <td><small>(Is published : {{ isPublished(book) }})</small></td>
+  </tr>
+  } @empty {
+  <tr>
+    <td>There are no items.</td>
+  </tr>
+  }
+</table>

@@ -1,0 +1,9 @@
+<header class="container">
+  <h1>Noprob IT, sample Node / Angular 20 ssr / MySQL Prof of Concept</h1>
+  <nav>
+    @for (route of routes; track route.title) {
+    <a routerLink="/{{route.path}}">{{ route.title }}</a>
+    }
+  </nav>
+</header>
+<main class="container"><router-outlet /></main>

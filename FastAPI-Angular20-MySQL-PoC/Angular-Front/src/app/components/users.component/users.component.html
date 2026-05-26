@@ -1,0 +1,22 @@
+<h2>Users</h2>
+@if (loading) {
+<p>Loading…</p>
+}
+<table>
+  <!--
+  <li *ngFor="let u of users()">
+    {{ u.name }} <small>({{ u.email }})</small>
+  </li>
+  -->
+  @for (user of users; track user.name) {
+  <tr>
+    <td> Name : {{ user.name }} </td>
+    <td> - </td>
+    <td><small>(Email : {{ user.email }})</small></td>
+  </tr>
+  } @empty {
+  <tr>
+    <td>There are no items.</td>
+  </tr>
+  }
+</table>
